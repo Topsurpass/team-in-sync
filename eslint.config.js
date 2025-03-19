@@ -35,6 +35,7 @@ export default [
 			"no-alert": "warn",
 			"no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
 			"no-var": "error",
+			"no-undef": "off",
 			"prefer-const": "error",
 			"no-debugger": "error",
 
@@ -43,7 +44,7 @@ export default [
 				{ argsIgnorePattern: "^_" },
 			],
 			"@typescript-eslint/explicit-function-return-type": "off",
-			"@typescript-eslint/no-explicit-any": "warn",
+			"@typescript-eslint/no-explicit-any": "off",
 			"@typescript-eslint/no-non-null-assertion": "off",
 			"@typescript-eslint/ban-ts-comment": "warn",
 

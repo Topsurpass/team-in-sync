@@ -1,8 +1,6 @@
 import plugin from "tailwindcss/plugin";
 
 const shadcnPlugin = plugin(
-	// Add css variable definitions to the base layer
-
 	function ({ addBase }) {
 		addBase({
 			":root": {},
@@ -14,6 +12,14 @@ const shadcnPlugin = plugin(
 				colors: {
 					background: "hsl(var(--background))",
 					foreground: "hsl(var(--foreground))",
+					royal: {
+						DEFAULT: "#2563EB",
+						light: "#E9EFFD",
+					},
+				},
+				fontFamily: {
+					sans: ["Poppins", "sans-serif"],
+					lato: ["Lato", "Poppins", "sans-serif"],
 				},
 			},
 		},
