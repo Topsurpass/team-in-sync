@@ -14,7 +14,7 @@ export default function SkillsInformation() {
 	return (
 		<div className="flex justify-center">
 			<Card className="w-full border-0 shadow-none lg:w-1/3">
-				<CardHeader className="mb-5 mt-8">
+				<CardHeader className="mb-5">
 					<CardTitle className="text-2xl">Create your profile</CardTitle>
 				</CardHeader>
 				<CardContent className="grid gap-4">

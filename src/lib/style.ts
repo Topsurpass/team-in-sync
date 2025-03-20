@@ -22,8 +22,10 @@ export const reactSelectStyle = (
 		return {
 			...styles,
 			cursor: "pointer",
-			color: isSelected && "hsl(var(--background))",
-			backgroundColor: isSelected ? "green" : "hsl(var(--input-bg-color))",
+			color: isSelected ? "hsl(var(--foreground))" : "hsl(var(--foreground))",
+			backgroundColor: isSelected
+				? "hsl(var(--background))"
+				: "hsl(var(--background))",
 		};
 	},
 	multiValue: (styles: any) => {
@@ -36,7 +38,6 @@ export const reactSelectStyle = (
 	multiValueLabel: (styles: any) => {
 		return {
 			...styles,
-			// color: "hsl(var(--foreground))",
 			color: "#324DB7",
 		};
 	},
@@ -44,7 +45,6 @@ export const reactSelectStyle = (
 		return {
 			...styles,
 			borderRadius: "10px",
-			// backgroundColor: "#324DB7"
 			backgroundColor: "#F1F4FF",
 			color: "#324DB7",
 			fontSize: "20px",

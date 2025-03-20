@@ -61,7 +61,7 @@ export default function Profile() {
 		<div className="mx-auto">
 			<div className="mt-10 w-full px-3 md:pr-5">
 				{/* <pre>{JSON.stringify(methods.watch(), null, 2)}</pre> */}
-				<div className="space-y-1 overflow-hidden rounded-lg bg-white">
+				<div className="space-y-5 overflow-hidden rounded-lg">
 					<StepperLabel steps={steps} activeStep={activeStep} />
 					<div className="w-full">
 						<div className="flex flex-col gap-8">
