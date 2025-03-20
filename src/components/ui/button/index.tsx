@@ -34,7 +34,7 @@ const buttonVariants = cva(
 				true: "w-full",
 			},
 			disabled: {
-				true: "disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-50 ",
+				true: "disabled:cursor-not-allowed disabled:bg-royal disabled:opacity-50 ",
 			},
 		},
 		defaultVariants: {

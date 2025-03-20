@@ -1,4 +1,4 @@
-import CountdownTimer from "@/components/page-components/countdown-timer";
+import CountdownTimer from "@/components/countdown-timer";
 export default function Home() {
 	return (
 		<div className="flex min-h-screen flex-col items-center justify-center px-4">

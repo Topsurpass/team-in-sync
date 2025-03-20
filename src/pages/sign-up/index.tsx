@@ -1,10 +1,10 @@
 import { Mail, AlertCircle } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import LoginPic from "@/assets/login-pic.svg";
+import SignupPic from "@/assets/signup-pic.svg";
 import { Button } from "@/components/ui/button";
 import Rectangle from "@/assets/rectangle.svg";
 import {
@@ -15,29 +15,31 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { PasswordField, TextField } from "@/components/ui/forms";
-import { LoginInputs, LoginSchema } from "@/validations/login-schema";
-import useLoginUser from "@/api/authentication/use-login-user";
+import { SignupInputs, SignupSchema } from "@/validations/signup-schema";
+import useSignupUser from "@/api/authentication/use-signup-user";
 
-export default function Login() {
+export default function SignUp() {
 	const [showPassword, setShowPassword] = useState(false);
-	const navigate = useNavigate();
-	const { control, handleSubmit } = useForm<LoginInputs>({
-		resolver: zodResolver(LoginSchema),
+	// const navigate = useNavigate();
+	const { control, handleSubmit } = useForm<SignupInputs>({
+		resolver: zodResolver(SignupSchema),
 		defaultValues: {
-			email: "user@gmail.com",
-			password: "password",
+			email: "",
+			password: "",
+			fullName: "",
 		},
 	});
 
-	const { mutate: loginUser, isPending, isError, error } = useLoginUser();
+	const { mutate: signupUser, isPending, isError, error } = useSignupUser();
 
 	const handleShowPassword = () => {
 		setShowPassword(!showPassword);
 	};
 
-	const processForm: SubmitHandler<LoginInputs> = async (data) => {
+	const processForm: SubmitHandler<SignupInputs> = async (data) => {
 		// JSON.stringify(data, null, 2);
-		loginUser(data);
+		signupUser(data);
+		// navigate("/login");
 	};
 
 	return (
@@ -50,22 +52,30 @@ export default function Login() {
 					>
 						<div className="max-w-sm text-center">
 							<h1 className="text-2xl font-bold dark:text-black">
-								Jump back into your projects and connect with your team.
+								Join Our Community and Build Your Future.
 							</h1>
 						</div>
 						<img
 							className="md:h-[50%] md:w-[50%]"
-							src={LoginPic}
-							alt="Login photo"
+							src={SignupPic}
+							alt="Signup photo"
 						/>
 					</div>
 				</div>
 
 				<Card className="border-0 shadow-none lg:w-1/3">
 					<CardHeader className="mb-5 mt-12">
-						<CardTitle className="text-2xl">Login</CardTitle>
+						<CardTitle className="text-2xl">Create an account</CardTitle>
 					</CardHeader>
 					<CardContent className="grid gap-4">
+						<div>
+							<TextField
+								label="Full Name"
+								name="fullName"
+								control={control}
+								placeholder="Type your full name"
+							/>
+						</div>
 						<div>
 							<TextField
 								label="Email"
@@ -90,36 +100,19 @@ export default function Login() {
 						</div>
 					</CardContent>
 					<CardFooter className="flex flex-col space-y-4">
-						<div className="flex w-full items-center justify-between">
-							<div className="flex items-center space-x-2">
-								<input type="checkbox" />
-								<span>Remember me</span>
-							</div>
-							<Button
-								type="button"
-								onClick={() => navigate("/forgot-password")}
-								variant="link"
-								className="text-gray-700 dark:text-white"
-							>
-								Forget Password?
-							</Button>
-						</div>
 						<Button
 							className="w-2/3 rounded-3xl"
 							type="submit"
-							label="Login"
+							label="Create account"
 							onClick={handleSubmit(processForm)}
 							isLoading={isPending}
 							disabled={isPending}
 						/>
 						<div>
 							<p>
-								Dont't have an account?{" "}
-								<Link
-									to="/register"
-									className="text-royal hover:underline"
-								>
-									Create an Account
+								Already have an account?{" "}
+								<Link to="/login" className="text-royal hover:underline">
+									Log In
 								</Link>
 							</p>
 						</div>
