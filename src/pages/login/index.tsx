@@ -24,8 +24,8 @@ export default function Login() {
 	const { control, handleSubmit } = useForm<LoginInputs>({
 		resolver: zodResolver(LoginSchema),
 		defaultValues: {
-			email: "temitopeabiodun685@gmail.com",
-			password: "password",
+			email: "",
+			password: "",
 		},
 	});
 
@@ -41,8 +41,8 @@ export default function Login() {
 
 	return (
 		<div className="relative flex h-screen w-full flex-col">
-			<form className="mx-auto flex w-full flex-col gap-5 px-4 md:flex-row">
-				<div className="p-5 md:h-screen md:w-1/2">
+			<form className="mx-auto flex w-full flex-col md:flex-row md:gap-5 md:px-4">
+				<div className="hidden md:flex md:h-screen md:w-1/2 md:p-5">
 					<div
 						className="flex h-full w-full flex-col items-center justify-center bg-cover bg-center bg-no-repeat md:justify-evenly md:bg-contain"
 						style={{ backgroundImage: `url("${Rectangle}")` }}

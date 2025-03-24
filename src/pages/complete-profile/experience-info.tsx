@@ -16,7 +16,9 @@ export default function ExperienceInformation() {
 		<div className="flex justify-center">
 			<Card className="w-full border-0 shadow-none lg:w-1/3">
 				<CardHeader className="mb-5">
-					<CardTitle className="text-2xl">Create your profile</CardTitle>
+					<CardTitle className="text-xl md:text-2xl">
+						Create your profile
+					</CardTitle>
 				</CardHeader>
 				<CardContent className="grid gap-4">
 					<div>

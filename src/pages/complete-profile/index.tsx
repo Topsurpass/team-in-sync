@@ -19,7 +19,7 @@ const initialValues = {
 };
 
 export default function CompleteProfile() {
-	const [activeStep, setActiveStep] = useState(2);
+	const [activeStep, setActiveStep] = useState(1);
 	const isLastStep = activeStep === steps.length;
 	// const { mutate: signupUser, isPending, isError, error } = useSignupUser();
 	const methods = useForm<ProfileInputs>({
@@ -59,7 +59,7 @@ export default function CompleteProfile() {
 	};
 	return (
 		<div className="mx-auto">
-			<div className="mt-10 w-full px-3 md:pr-5">
+			<div className="mt-10 w-full md:px-3 md:pr-5">
 				{/* <pre>{JSON.stringify(methods.watch(), null, 2)}</pre> */}
 				<div className="space-y-5 overflow-hidden rounded-lg">
 					<StepperLabel steps={steps} activeStep={activeStep} />

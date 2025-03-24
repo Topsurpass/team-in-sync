@@ -52,7 +52,7 @@ function SideBar() {
 					"mt-auto flex items-center p-4 text-black transition-all duration-300 ease-in-out hover:text-royal",
 					{
 						"justify-center": toggleCollapse,
-						"gap-4": !toggleCollapse,
+						"gap-4 pl-10": !toggleCollapse,
 					}
 				)}
 			>

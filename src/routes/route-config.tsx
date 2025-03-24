@@ -12,6 +12,8 @@ import PublicLayout from "@/layout/public-layout";
 import PublicRoute from "./public-route";
 import VerifyEmail from "@/pages/verify-email";
 import NotFoundPage from "@/pages/error404";
+import PreProtectedLayout from "@/layout/pre-protected-layout";
+import PreProtectedRoute from "./pre-private-route";
 
 const routeConfig = [
 	{
@@ -57,10 +59,7 @@ const routeConfig = [
 				path: "profile",
 				element: <Profile />,
 			},
-			{
-				path: "create-profile",
-				element: <CompleteProfile />,
-			},
+
 			{
 				path: "projects",
 				element: <Projects />,
@@ -68,6 +67,21 @@ const routeConfig = [
 			{
 				path: "notifications",
 				element: <Notifications />,
+			},
+		],
+	},
+	{
+		path: "/",
+		element: (
+			<PreProtectedRoute>
+				<PreProtectedLayout />
+			</PreProtectedRoute>
+		),
+		children: [
+			{
+				index: true,
+				path: "create-profile",
+				element: <CompleteProfile />,
 			},
 		],
 	},
