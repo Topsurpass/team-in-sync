@@ -24,7 +24,7 @@ export default function Login() {
 	const { control, handleSubmit } = useForm<LoginInputs>({
 		resolver: zodResolver(LoginSchema),
 		defaultValues: {
-			email: "user@gmail.com",
+			email: "temitopeabiodun685@gmail.com",
 			password: "password",
 		},
 	});
@@ -36,7 +36,6 @@ export default function Login() {
 	};
 
 	const processForm: SubmitHandler<LoginInputs> = async (data) => {
-		// JSON.stringify(data, null, 2);
 		loginUser(data);
 	};
 

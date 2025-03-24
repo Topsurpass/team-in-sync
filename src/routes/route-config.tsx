@@ -1,4 +1,4 @@
-import Home from "@/pages/home";
+import Home from "@/pages/home-page";
 import Login from "@/pages/login";
 import SignUp from "@/pages/sign-up";
 import CompleteProfile from "@/pages/complete-profile";
@@ -8,23 +8,37 @@ import ProtectedRoute from "./protected-route";
 import Profile from "@/pages/profile";
 import Projects from "@/pages/projects";
 import Notifications from "@/pages/notifications";
+import PublicLayout from "@/layout/public-layout";
+import PublicRoute from "./public-route";
+import VerifyEmail from "@/pages/verify-email";
+import NotFoundPage from "@/pages/error404";
 
 const routeConfig = [
 	{
-		path: "/onboarding",
-		element: <Home />,
-	},
-	{
-		path: "/login",
-		element: <Login />,
-	},
-	{
-		path: "/register",
-		element: <SignUp />,
-	},
-	{
-		path: "/create-profile",
-		element: <CompleteProfile />,
+		path: "/",
+		element: (
+			<PublicRoute>
+				<PublicLayout />
+			</PublicRoute>
+		),
+		children: [
+			{
+				index: true,
+				element: <Home />,
+			},
+			{
+				path: "login",
+				element: <Login />,
+			},
+			{
+				path: "register",
+				element: <SignUp />,
+			},
+			{
+				path: "verify-email/:token",
+				element: <VerifyEmail />,
+			},
+		],
 	},
 	{
 		path: "/",
@@ -36,11 +50,16 @@ const routeConfig = [
 		children: [
 			{
 				index: true,
+				path: "dashboard",
 				element: <Dashboard />,
 			},
 			{
 				path: "profile",
 				element: <Profile />,
+			},
+			{
+				path: "create-profile",
+				element: <CompleteProfile />,
 			},
 			{
 				path: "projects",
@@ -51,6 +70,10 @@ const routeConfig = [
 				element: <Notifications />,
 			},
 		],
+	},
+	{
+		path: "*",
+		element: <NotFoundPage />,
 	},
 ];
 

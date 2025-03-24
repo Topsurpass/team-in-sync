@@ -8,8 +8,8 @@ const SIDENAV_ITEMS: SideNavItem[] = [
 		title: "",
 		menuList: [
 			{
-				title: "Home",
-				path: "/",
+				title: "Dashboard",
+				path: "/dashboard",
 				icon: <CiHome size={20} />,
 			},
 			{

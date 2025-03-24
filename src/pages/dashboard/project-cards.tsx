@@ -24,7 +24,7 @@ export default function ProjectListCard({ project, maxVisibleMembers }: ProjectP
 	};
 
 	return (
-		<Card className="flex min-h-[300px] w-full flex-col border shadow-md">
+		<Card className="flex min-h-[200px] w-full flex-col border shadow-md">
 			<CardHeader>
 				<CardTitle className="text-xl font-semibold">{project.title}</CardTitle>
 				<CardDescription

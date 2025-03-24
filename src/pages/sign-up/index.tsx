@@ -1,5 +1,4 @@
 import { Mail, AlertCircle } from "lucide-react";
-// import { useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -20,13 +19,16 @@ import useSignupUser from "@/api/authentication/use-signup-user";
 
 export default function SignUp() {
 	const [showPassword, setShowPassword] = useState(false);
-	// const navigate = useNavigate();
+	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
 	const { control, handleSubmit } = useForm<SignupInputs>({
 		resolver: zodResolver(SignupSchema),
 		defaultValues: {
 			email: "",
 			password: "",
-			fullName: "",
+			confirmPassword: "",
+			first_name: "",
+			last_name: "",
 		},
 	});
 
@@ -35,11 +37,13 @@ export default function SignUp() {
 	const handleShowPassword = () => {
 		setShowPassword(!showPassword);
 	};
+	const handleShowConfirmPassword = () => {
+		setShowConfirmPassword(!showConfirmPassword);
+	};
 
 	const processForm: SubmitHandler<SignupInputs> = async (data) => {
 		// JSON.stringify(data, null, 2);
 		signupUser(data);
-		// navigate("/login");
 	};
 
 	return (
@@ -70,8 +74,16 @@ export default function SignUp() {
 					<CardContent className="grid gap-4">
 						<div>
 							<TextField
-								label="Full Name"
-								name="fullName"
+								label="Firstname"
+								name="first_name"
+								control={control}
+								placeholder="Type your full name"
+							/>
+						</div>
+						<div>
+							<TextField
+								label="Lastname"
+								name="last_name"
 								control={control}
 								placeholder="Type your full name"
 							/>
@@ -98,6 +110,18 @@ export default function SignUp() {
 								showLeftIcon={false}
 							/>
 						</div>
+						<div>
+							<PasswordField
+								label="Confirm Password"
+								name="confirmPassword"
+								control={control}
+								showPassword={showConfirmPassword}
+								placeholder="Enter your password"
+								onIconClick={() => handleShowConfirmPassword()}
+								type={showConfirmPassword ? "text" : "password"}
+								showLeftIcon={false}
+							/>
+						</div>
 					</CardContent>
 					<CardFooter className="flex flex-col space-y-4">
 						<Button
@@ -120,7 +144,7 @@ export default function SignUp() {
 							<div className="mt-2 flex items-center justify-center gap-2">
 								<AlertCircle size={20} color="red" />
 								<span className="text-red-500">
-									{error?.response?.data?.message as any}
+									{error?.response?.data?.errors?.email as any}
 								</span>
 							</div>
 						)}

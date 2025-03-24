@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CountdownTimer from "@/components/countdown-timer";
 export default function Home() {
 	return (
@@ -14,6 +15,12 @@ export default function Home() {
 				<div className="animate-pulse-slow space-y-4">
 					<p className="text-xl">Crafting something extraordinary</p>
 				</div>
+				<Link
+					to={"/login"}
+					className="rounded border bg-royal px-8 py-2 text-white hover:underline"
+				>
+					Login
+				</Link>
 			</main>
 		</div>
 	);

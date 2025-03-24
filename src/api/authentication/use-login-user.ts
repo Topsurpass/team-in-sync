@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "sonner";
@@ -28,27 +29,29 @@ export interface ILogin {
 }
 
 const useLoginUser = () => {
+	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const addUserToStore = useAuthStore((state) => state.setUser);
 	return useMutation({
 		mutationFn: async (requestPayload: RequestPayload) => {
 			try {
-				const res = await HTTP.post("/api/v1/user/login", requestPayload);
+				const res = await HTTP.post("/api/v1/users/login/", requestPayload);
 				return res;
 			} catch (error) {
 				return Promise.reject(error);
 			}
 		},
 		onSuccess: (res) => {
-			const { token, ...rest } = (res.data as any).data;
-			setAuthTokenHTTP(token);
-			const decodedToken = jwtDecode(token);
+			const { access, ...rest } = (res.data as any).data;
+			setAuthTokenHTTP(access);
+			const decodedToken = jwtDecode(access);
 			addUserToStore({
-				token,
+				access,
 				...rest,
 				...decodedToken,
 			} as any);
 			queryClient.invalidateQueries();
+			navigate("/");
 		},
 		onError: (err: any) => {
 			toast.error("Login failed", { description: err?.response?.data?.message });

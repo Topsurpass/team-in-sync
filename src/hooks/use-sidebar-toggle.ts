@@ -7,7 +7,7 @@ interface SidebarToggle {
 }
 
 export const useSideBarToggle = create<SidebarToggle>((set, get) => ({
-	toggleCollapse: false,
+	toggleCollapse: true,
 
 	invokeToggleCollapse: () => set({ toggleCollapse: !get().toggleCollapse }),
 

@@ -11,13 +11,13 @@ type TState = {
 	firstname: string;
 	lastname: string;
 	email: string;
-	phone: string;
-	roles: string[];
-	authorities: string[];
+	// phone: string;
+	// roles: string[];
+	// authorities: string[];
 	isAuthenticated: boolean;
-	isSuperAdmin: boolean;
+	// isSuperAdmin: boolean;
 	userStatus: string;
-	address: string;
+	// address: string;
 };
 
 type TAction = {
@@ -34,13 +34,8 @@ const initialState: TState = {
 	firstname: "",
 	lastname: "",
 	email: "",
-	phone: "",
-	roles: [],
-	authorities: [],
 	isAuthenticated: false,
-	isSuperAdmin: false,
 	userStatus: "",
-	address: "",
 };
 
 const useAuthStore = create<TState & TAction>()(
@@ -52,18 +47,14 @@ const useAuthStore = create<TState & TAction>()(
 					setUser: (payload) =>
 						set((state) => {
 							state.expiresIn = payload.exp;
-							state.accessToken = payload.token;
-							state.refreshToken = payload.refreshToken;
+							state.accessToken = payload.access;
+							state.refreshToken = payload.refresh;
 							state.email = payload.email;
-							state.firstname = payload.firstname;
-							state.lastname = payload.lastname;
-							state.roles = payload.roles;
-							state.authorities = payload.roles[0].permissions;
+							state.firstname = payload.first_name;
+							state.lastname = payload.last_name;
+							state.userStatus = payload.is_active;
 							state.isAuthenticated = true;
-							state.isSuperAdmin = !payload?.userTenant;
 							state.id = payload.id;
-							state.phone = payload.phone;
-							state.address = payload.address;
 						}),
 					reset: () => {
 						set(initialState);
@@ -73,7 +64,6 @@ const useAuthStore = create<TState & TAction>()(
 				}),
 				{
 					name: "storage-name",
-					// getStorage: ()=> sessionStorage
 				}
 			),
 			{

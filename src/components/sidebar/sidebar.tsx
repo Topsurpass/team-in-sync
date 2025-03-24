@@ -1,20 +1,22 @@
 import classNames from "classnames";
+import { FiLogOut } from "react-icons/fi";
 import { IoArrowBack, IoArrowForward } from "react-icons/io5";
 import { useSideBarToggle } from "@/hooks/use-sidebar-toggle";
 import SideBarMenuGroup from "@/components/sidebar/sidebar-menu-group";
 import SIDENAV_ITEMS from "@/routes/menu-list";
-import { cn } from "@/lib/utils";
 import { SideNavItem } from "@/types/sidenav-item";
+import useAuthStore from "@/stores/user-store";
 
 function SideBar() {
 	const { toggleCollapse, invokeToggleCollapse } = useSideBarToggle();
+	const logout = useAuthStore((state) => state.reset);
 
 	const sidebarToggle = () => {
 		invokeToggleCollapse();
 	};
 
 	const asideStyle = classNames(
-		"bg-white fixed top-0 bottom-0 left-0 text-white border rounded-xl transition-all duration-300 ease-in-out z-[50] overflow-y-auto",
+		"bg-white fixed top-0 bottom-0 left-0 text-white border rounded-xl transition-all duration-300 ease-in-out z-[50] overflow-y-auto flex flex-col overflow-x-hidden",
 		{
 			"w-[20rem]": !toggleCollapse,
 			"w-[5.4rem] sm:left-0 left-[-100%]": toggleCollapse,
@@ -36,17 +38,27 @@ function SideBar() {
 				)}
 			</button>
 
-			<nav
-				className={cn(
-					"flex flex-col gap-2 text-black transition-all duration-300 ease-in-out dark:text-white"
-				)}
-			>
-				<div className="flex flex-col gap-5 px-4 pt-10">
+			<nav className="flex flex-grow flex-col gap-2 text-black transition-all duration-300 ease-in-out dark:text-white">
+				<div className="flex flex-grow flex-col gap-5 px-4 pt-10">
 					{SIDENAV_ITEMS.map((item: SideNavItem) => (
 						<SideBarMenuGroup key={item.title} menuGroup={item} />
 					))}
 				</div>
 			</nav>
+
+			<button
+				onClick={logout}
+				className={classNames(
+					"mt-auto flex items-center p-4 text-black transition-all duration-300 ease-in-out hover:text-royal",
+					{
+						"justify-center": toggleCollapse,
+						"gap-4": !toggleCollapse,
+					}
+				)}
+			>
+				<FiLogOut size={20} className="cursor-pointer" />
+				{!toggleCollapse && <p className="">Logout</p>}
+			</button>
 		</aside>
 	);
 }
