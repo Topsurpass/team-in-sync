@@ -13,7 +13,7 @@ export default function SkillsInformation() {
 
 	return (
 		<div className="flex justify-center">
-			<Card className="w-full border-0 shadow-none lg:w-1/3">
+			<Card className="w-full border-0 shadow-none">
 				<CardHeader className="mb-5">
 					<CardTitle className="text-xl md:text-2xl">
 						Create your profile

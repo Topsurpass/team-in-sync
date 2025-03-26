@@ -18,8 +18,8 @@ export const SignupSchema = z
 				regexPassword,
 				"Password must be 8+ characters, with a letter, number, and special character"
 			),
-		first_name: z.string().min(1, { message: "Firstname is required" }),
-		last_name: z.string().min(1, { message: "Lastname is required" }),
+		// first_name: z.string().min(1, { message: "Firstname is required" }),
+		// last_name: z.string().min(1, { message: "Lastname is required" }),
 		email: emailSchema,
 	})
 	.superRefine(({ password, confirmPassword }, ctx) => {

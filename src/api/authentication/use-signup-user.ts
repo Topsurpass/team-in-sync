@@ -1,4 +1,4 @@
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { HTTP } from "@/lib/http-client";
@@ -6,12 +6,12 @@ import { HTTP } from "@/lib/http-client";
 type RequestPayload = {
 	email: string;
 	password: string;
-	first_name: string;
-	last_name: string;
+	// first_name: string;
+	// last_name: string;
 };
 
 export default function useSignupUser() {
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 	return useMutation({
 		mutationFn: async (requestPayload: RequestPayload) => {
 			try {
@@ -26,7 +26,7 @@ export default function useSignupUser() {
 			toast.success("Signup successful!", {
 				description: resData.message,
 			});
-			// navigate("/create-profile");
+			navigate("/login");
 		},
 		onError: (err: any) => {
 			toast.error("Signup failed", {

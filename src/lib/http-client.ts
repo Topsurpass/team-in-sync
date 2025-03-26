@@ -1,8 +1,8 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import { toast } from "sonner";
 import config from "@/@config";
 import useAuthStore from "@/stores/user-store";
+import { setAuthTokenHTTP } from "@/lib/set-auth-token";
 
 export const HTTP = axios.create({
 	baseURL: config.baseUrl,
@@ -14,41 +14,56 @@ const AuthHTTP = axios.create({
 	timeout: config.httpTimeout,
 });
 
-export const refreshAccessToken = async () => {
-	const addUserToStore = useAuthStore.getState().setUser;
-	const logout = useAuthStore.getState().reset;
+const isTokenExpired = (token: string): boolean => {
 	try {
-		const { accessToken } = useAuthStore.getState();
-		const res = await HTTP.post("/api/v1/user/refresh", {
-			refreshToken: accessToken,
+		const decoded: any = jwtDecode(token);
+		return decoded.exp * 1000 < Date.now();
+	} catch {
+		return true;
+	}
+};
+
+export const refreshAccessToken = async () => {
+	const { setUser, reset, refreshToken } = useAuthStore.getState();
+
+	if (!refreshToken || isTokenExpired(refreshToken)) {
+		reset();
+		return Promise.reject("Session expired. Please log in again.");
+	}
+
+	try {
+		const res = await HTTP.post("/api/v1/users/token/refresh/", {
+			refresh: refreshToken,
 		});
-		const { token, ...rest } = (res.data as any).data;
-		const decodedToken = jwtDecode(token);
-		addUserToStore({
-			token,
+		const { access, refresh, ...rest } = (res.data as any).data;
+		setAuthTokenHTTP(access);
+
+		const decodedToken = jwtDecode(access);
+
+		setUser({
+			access,
+			refresh,
 			...rest,
 			...decodedToken,
 		} as any);
-		return token;
+
+		return access;
 	} catch (err: any) {
-		logout();
-		toast.error(err?.response?.data?.error);
-		return Promise.reject(err);
+		reset();
+		return Promise.reject(err?.response?.data?.message || "Session expired.");
 	}
 };
 
 AuthHTTP.interceptors.request.use(
-	async (setting: any) => {
-		const token = useAuthStore.getState().accessToken;
-		if (token !== null && token !== undefined && token) {
-			setting.headers.Authorization = `Bearer ${token}`;
-			return setting;
+	async (request: any) => {
+		const { accessToken } = useAuthStore.getState();
+
+		if (accessToken && !isTokenExpired(accessToken)) {
+			request.headers.Authorization = `Bearer ${accessToken}`;
 		}
-		return setting;
+		return request;
 	},
-	(err: any) => {
-		return Promise.reject(err);
-	}
+	(err: any) => Promise.reject(err)
 );
 
 AuthHTTP.interceptors.response.use(
@@ -62,8 +77,8 @@ AuthHTTP.interceptors.response.use(
 		if (error.response && error.response.status === 401 && !originalRequest._retry) {
 			try {
 				originalRequest._retry = true;
-				const token = await refreshAccessToken();
-				originalRequest.headers.Authorization = `Bearer ${token}`;
+				const newToken = await refreshAccessToken();
+				originalRequest.headers.Authorization = `Bearer ${newToken}`;
 				return await HTTP(originalRequest);
 			} catch (refreshError) {
 				logout();

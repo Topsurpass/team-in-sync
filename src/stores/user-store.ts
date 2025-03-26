@@ -11,18 +11,16 @@ type TState = {
 	firstname: string;
 	lastname: string;
 	email: string;
-	// phone: string;
-	// roles: string[];
-	// authorities: string[];
+	is_profile_complete: boolean;
+	is_verified: boolean;
 	isAuthenticated: boolean;
-	// isSuperAdmin: boolean;
 	userStatus: string;
-	// address: string;
 };
 
 type TAction = {
 	setUser: (_payload: any) => void;
 	reset: () => void;
+	setIsProfileComplete: (_value: boolean) => void;
 };
 
 // define the initial state
@@ -36,6 +34,8 @@ const initialState: TState = {
 	email: "",
 	isAuthenticated: false,
 	userStatus: "",
+	is_profile_complete: false,
+	is_verified: false,
 };
 
 const useAuthStore = create<TState & TAction>()(
@@ -53,14 +53,18 @@ const useAuthStore = create<TState & TAction>()(
 							state.firstname = payload.first_name;
 							state.lastname = payload.last_name;
 							state.userStatus = payload.is_active;
+							state.is_profile_complete = payload.is_profile_complete;
+							state.is_verified = payload.is_verified;
 							state.isAuthenticated = true;
-							state.id = payload.id;
+							state.id = payload.user_id;
 						}),
 					reset: () => {
 						set(initialState);
 						setAuthToken(false);
 						setAuthTokenHTTP(false);
 					},
+					setIsProfileComplete: (value: boolean) =>
+						set({ is_profile_complete: value }),
 				}),
 				{
 					name: "storage-name",

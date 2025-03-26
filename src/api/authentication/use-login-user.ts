@@ -11,23 +11,6 @@ type RequestPayload = {
 	password: string;
 };
 
-export interface ILogin {
-	access_token: string;
-	token_type: string;
-	refresh_token: string;
-	expires_in: number;
-	scope: string;
-	id: number;
-	firstname: string;
-	email: string;
-	mobile: string;
-	lastname: string;
-	username: string;
-	roles: string[];
-	authorities: string[];
-	jti: string;
-}
-
 const useLoginUser = () => {
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
