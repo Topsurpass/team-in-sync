@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { IEventFileUpload } from "@/types";
+import { IProfilePicFileUpload } from "@/types";
 
 /**
  * 1kb = 1024 bytes
@@ -21,7 +21,7 @@ function fileValidator(file: any) {
 
 export default function useEventUpload({
 	setFile,
-}: Omit<IEventFileUpload, "resetFile" | "file">) {
+}: Omit<IProfilePicFileUpload, "resetFile" | "file">) {
 	/**
 	 *
 	 */
