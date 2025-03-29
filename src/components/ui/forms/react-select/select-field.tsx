@@ -4,9 +4,6 @@ import Select, { MenuPlacement, Props as SelectProps } from "react-select";
 import { cn } from "@/lib/utils";
 import { reactSelectStyle } from "@/lib/style";
 
-// import { Option, MultiValueLabel, SingleValue } from "./custom-component";
-
-// import CreatableSelect from "react-select/creatable";
 interface InputProps extends SelectProps {
 	label?: string;
 	className?: string;

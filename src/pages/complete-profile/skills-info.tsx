@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+import { useEffect, useMemo } from "react";
 import {
 	Card,
 	CardContent,
@@ -7,9 +8,28 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { ReactSelect } from "@/components/ui/forms";
-import { SKILLS } from "@/data/skills";
+import useGetSkills from "@/api/skills/use-get-skills";
+
 export default function SkillsInformation() {
-	const { control } = useFormContext();
+	const { control, watch, trigger, setValue } = useFormContext();
+	const role = watch("role")?.value;
+	const { data, isLoading } = useGetSkills(role);
+
+	useEffect(() => {
+		if (role) {
+			setValue("skills", []);
+			trigger("skills");
+		}
+	}, [role, setValue, trigger]);
+
+	const formattedSkills = useMemo(
+		() =>
+			(data as any)?.data?.map((skill: any) => ({
+				value: skill.id,
+				label: skill.name,
+			})) || [],
+		[data]
+	);
 
 	return (
 		<div className="flex justify-center">
@@ -25,9 +45,9 @@ export default function SkillsInformation() {
 							label="Skills"
 							control={control}
 							name="skills"
-							options={SKILLS}
-							isLoading={false}
-							isDisabled={false}
+							options={formattedSkills}
+							isLoading={isLoading}
+							isDisabled={isLoading}
 							isMulti
 							placeholder="Select your skills"
 						/>

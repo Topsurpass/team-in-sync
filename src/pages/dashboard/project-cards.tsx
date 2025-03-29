@@ -18,25 +18,25 @@ export default function ProjectListCard({ project, maxVisibleMembers }: ProjectP
 	const extraMembers = project.members.length - maxVisibleMembers;
 
 	const statusColors: Record<string, string> = {
-		Ongoing: "bg-blue-100 text-blue-600",
-		Completed: "bg-green-100 text-green-600",
-		Pending: "bg-yellow-100 text-yellow-600",
+		Ongoing: "bg-blue-100 text-blue-600 text-xs",
+		Completed: "bg-green-100 text-green-600 text-xs",
+		Pending: "bg-yellow-100 text-yellow-600 text-xs",
 	};
 
 	return (
 		<Card className="flex min-h-[200px] w-full flex-col border shadow-md">
 			<CardHeader>
-				<CardTitle className="text-xl font-semibold">{project.title}</CardTitle>
+				<CardTitle className="text-lg font-semibold">{project.title}</CardTitle>
 				<CardDescription
 					className={`flex w-fit justify-center rounded-xl px-3 py-1 text-sm font-medium ${statusColors[project.status] || "bg-gray-100 text-black"}`}
 				>
 					{project.status}
 				</CardDescription>
 			</CardHeader>
-			<CardContent className="grid flex-1 gap-4">
+			<CardContent className="grid flex-1 gap-2 py-2">
 				<div>
 					<h2 className="text-lg font-medium">About Project</h2>
-					<p className="text-gray-600">
+					<p className="text-sm text-gray-600">
 						{project.description.length > 100
 							? project.description.slice(0, 100) + "..."
 							: project.description}
@@ -44,7 +44,7 @@ export default function ProjectListCard({ project, maxVisibleMembers }: ProjectP
 				</div>
 				<div>
 					<h2 className="text-lg font-medium">Looking For</h2>
-					<p className="text-gray-600">
+					<p className="text-sm text-gray-600">
 						{project.profession.length > 4
 							? project.profession.slice(0, 2).join(", ") + ", ..."
 							: project.profession.join(", ")}
@@ -67,7 +67,7 @@ export default function ProjectListCard({ project, maxVisibleMembers }: ProjectP
 						</div>
 					)}
 				</div>
-				<Button className="rounded-3xl bg-blue-500 text-white">
+				<Button className="rounded-3xl bg-blue-500 p-2 text-xs text-white">
 					View Details
 				</Button>
 			</CardFooter>

@@ -47,10 +47,7 @@ export default function TextArea(props: InputProps) {
 		<>
 			<div>
 				{label && (
-					<label
-						htmlFor={name}
-						className="mb-1 block text-sm font-medium text-gray-700"
-					>
+					<label htmlFor={name} className="mb-1 block text-sm font-medium">
 						{asterik && <span className="mr-[6px] text-[#DB1813]">*</span>}
 						{label}
 					</label>

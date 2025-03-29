@@ -10,22 +10,22 @@ import DatatableSearchInput from "./data-search-input";
 import { Button } from "@/components/ui/button";
 import { PopoverWrapper } from "@/components/popover";
 import { TextField, SelectField } from "@/components/ui/forms";
-// import { LoginInputs, LoginSchema } from "@/validations/login-schema";
 import { EXPERIENCE } from "@/lib/constants";
 import { ProfileInputs, profileSchema } from "@/validations/profile-schema";
-import useAuthStore from "@/stores/user-store";
+import useGetProfile from "@/api/profile/use-get-profile";
 
 const initialValues = {
-	role: "",
 	experience_level: "",
 };
+
 export default function Header() {
 	const [searchTerm, setSearchTerm] = useState("");
 	const { toggleCollapse, invokeToggleCollapse } = useSideBarToggle();
+	const { data } = useGetProfile();
+	const user = (data as any)?.data;
 	const sidebarToggle = () => {
 		invokeToggleCollapse();
 	};
-	const userStore = useAuthStore((state) => state);
 
 	const { control, handleSubmit } = useForm<ProfileInputs>({
 		resolver: zodResolver(profileSchema),
@@ -58,8 +58,17 @@ export default function Header() {
 				</button>
 				<div className="order-1 flex w-full items-center gap-5 px-2 sm:order-2 md:justify-between md:gap-10">
 					<div className="flex flex-none items-center gap-2">
-						<ProfilePicture />
-						<p className="hidden text-gray-700 sm:flex">{`${userStore.firstname} ${userStore.lastname}`}</p>
+						{user?.profile_picture_url ? (
+							<div className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
+								<img
+									src={user?.profile_picture_url}
+									alt={user?.full_name}
+								/>
+							</div>
+						) : (
+							<ProfilePicture />
+						)}
+						{/* <p className="hidden text-gray-700 sm:flex">{`${user?.full_name || ""}`}</p> */}
 					</div>
 					<div className="rounded-md border border-gray-300 md:flex-1">
 						<DatatableSearchInput

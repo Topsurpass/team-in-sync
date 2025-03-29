@@ -13,7 +13,7 @@ export default function Dashboard() {
 
 	return (
 		<div>
-			<div className="grid gap-4 sm:grid-cols-1 lg:grid-cols-3">
+			<div className="grid gap-2 sm:grid-cols-1 lg:grid-cols-3">
 				{paginatedProjects.map((project) => (
 					<ProjectListCard
 						key={project.id}

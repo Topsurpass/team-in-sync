@@ -18,7 +18,7 @@ function SideBar() {
 	const asideStyle = classNames(
 		"bg-white fixed top-0 bottom-0 left-0 text-white border rounded-xl transition-all duration-300 ease-in-out z-[50] overflow-y-auto flex flex-col overflow-x-hidden",
 		{
-			"w-[20rem]": !toggleCollapse,
+			"w-[18rem]": !toggleCollapse,
 			"w-[5.4rem] sm:left-0 left-[-100%]": toggleCollapse,
 		}
 	);

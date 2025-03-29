@@ -7,6 +7,7 @@ type StepperControlType = {
 	nextStep: () => void;
 	isLastStep: boolean;
 	handleSubmit: () => void;
+	isLoading: boolean;
 };
 
 export default function StepperControl({
@@ -15,6 +16,7 @@ export default function StepperControl({
 	nextStep,
 	isLastStep,
 	handleSubmit,
+	isLoading,
 }: StepperControlType) {
 	return (
 		<section className={cn("flex w-full justify-center gap-3 px-4")}>
@@ -22,6 +24,8 @@ export default function StepperControl({
 				Previous
 			</Button>
 			<Button
+				isLoading
+				disabled={isLoading}
 				onClick={isLastStep ? handleSubmit : nextStep}
 				className="w-full rounded-full md:w-2/3"
 				size={"lg"}

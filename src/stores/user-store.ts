@@ -8,8 +8,8 @@ type TState = {
 	expiresIn: number;
 	accessToken: string;
 	refreshToken: string;
-	firstname: string;
-	lastname: string;
+	full_name: string;
+	profile_pic: string;
 	email: string;
 	is_profile_complete: boolean;
 	is_verified: boolean;
@@ -29,8 +29,8 @@ const initialState: TState = {
 	expiresIn: 0,
 	accessToken: "",
 	refreshToken: "",
-	firstname: "",
-	lastname: "",
+	full_name: "",
+	profile_pic: "",
 	email: "",
 	isAuthenticated: false,
 	userStatus: "",
@@ -50,8 +50,8 @@ const useAuthStore = create<TState & TAction>()(
 							state.accessToken = payload.access;
 							state.refreshToken = payload.refresh;
 							state.email = payload.email;
-							state.firstname = payload.first_name;
-							state.lastname = payload.last_name;
+							state.full_name = payload.full_name;
+							state.profile_pic = payload.profile_picture;
 							state.userStatus = payload.is_active;
 							state.is_profile_complete = payload.is_profile_complete;
 							state.is_verified = payload.is_verified;
