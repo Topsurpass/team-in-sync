@@ -23,15 +23,20 @@ export const useGoogleAuth = () => {
 
 type GoogleAuthProps = {
 	children: React.ReactNode;
+	authType: "sign-in" | "sign-up";
 };
 
-export default function GoogleAuth({ children }: GoogleAuthProps) {
+export default function GoogleAuth({ children, authType }: GoogleAuthProps) {
 	const addUserToStore = useAuthStore((state) => state.setUser);
 
 	const handleSuccess = async (response: any) => {
 		try {
+			const endpoint =
+				authType === "sign-in"
+					? "api/v1/users/auth/google/login/"
+					: "api/v1/users/google-oauth/";
 			// Send the Google token to the backend
-			const res = await HTTP.post("api/v1/users/google-oauth/", {
+			const res = await HTTP.post(endpoint, {
 				token: response.credential,
 			});
 			const { access, ...rest } = (res.data as any).data;
@@ -44,7 +49,8 @@ export default function GoogleAuth({ children }: GoogleAuthProps) {
 			} as any);
 		} catch (error) {
 			toast.error("Google Authentication", {
-				description: (error as any).message,
+				description:
+					(error as any).response.data.message || (error as any).message,
 			});
 			return Promise.reject(error);
 		}

@@ -44,7 +44,7 @@ export default function Header() {
 	const headerStyle = cn(
 		"bg-sidebar fixed top-0 z-10 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 shadow-sm shadow-slate-500/40 transition-all duration-300 ease-in-out",
 		{
-			"sm:pl-[20rem]": !toggleCollapse,
+			"sm:pl-[18rem]": !toggleCollapse,
 			"sm:pl-[5.6rem]": toggleCollapse,
 		}
 	);
