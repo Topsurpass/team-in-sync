@@ -13,15 +13,19 @@ import { TextField, SelectField } from "@/components/ui/forms";
 import { EXPERIENCE } from "@/lib/constants";
 import { ProfileInputs, profileSchema } from "@/validations/profile-schema";
 import useGetProfile from "@/api/profile/use-get-profile";
+import { EntityType } from "@/types/enum";
+import useGlobalProvider from "@/hooks/use-global-provider";
 
 const initialValues = {
 	experience_level: "",
 };
 
 export default function Header() {
+	const { onModalOpen } = useGlobalProvider();
 	const [searchTerm, setSearchTerm] = useState("");
 	const { toggleCollapse, invokeToggleCollapse } = useSideBarToggle();
 	const { data } = useGetProfile();
+
 	const user = (data as any)?.data;
 	const sidebarToggle = () => {
 		invokeToggleCollapse();
@@ -68,7 +72,7 @@ export default function Header() {
 						) : (
 							<ProfilePicture />
 						)}
-						{/* <p className="hidden text-gray-700 sm:flex">{`${user?.full_name || ""}`}</p> */}
+						<p className="hidden text-gray-700 sm:flex">{`${user?.full_name || ""}`}</p>
 					</div>
 					<div className="rounded-md border border-gray-300 md:flex-1">
 						<DatatableSearchInput
@@ -115,7 +119,10 @@ export default function Header() {
 							</Button>
 						</PopoverWrapper>
 					</div>
-					<Button className="hidden flex-none rounded-3xl sm:flex">
+					<Button
+						className="hidden flex-none rounded-3xl sm:flex"
+						onClick={() => onModalOpen(EntityType.PROJECT)}
+					>
 						Create project
 					</Button>
 				</div>

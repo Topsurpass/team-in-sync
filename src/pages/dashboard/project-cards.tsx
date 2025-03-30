@@ -35,7 +35,7 @@ export default function ProjectListCard({ project, maxVisibleMembers }: ProjectP
 			</CardHeader>
 			<CardContent className="grid flex-1 gap-2 py-2">
 				<div>
-					<h2 className="text-lg font-medium">About Project</h2>
+					<h2 className="font-bold">About Project</h2>
 					<p className="text-sm text-gray-600">
 						{project.description.length > 100
 							? project.description.slice(0, 100) + "..."
@@ -43,7 +43,7 @@ export default function ProjectListCard({ project, maxVisibleMembers }: ProjectP
 					</p>
 				</div>
 				<div>
-					<h2 className="text-lg font-medium">Looking For</h2>
+					<h2 className="font-bold">Looking For</h2>
 					<p className="text-sm text-gray-600">
 						{project.profession.length > 4
 							? project.profession.slice(0, 2).join(", ") + ", ..."

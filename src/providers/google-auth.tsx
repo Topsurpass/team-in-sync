@@ -31,7 +31,7 @@ export default function GoogleAuth({ children }: GoogleAuthProps) {
 	const handleSuccess = async (response: any) => {
 		try {
 			// Send the Google token to the backend
-			const res = await HTTP.post("api/v1/auth/google/", {
+			const res = await HTTP.post("api/v1/users/google-oauth/", {
 				token: response.credential,
 			});
 			const { access, ...rest } = (res.data as any).data;

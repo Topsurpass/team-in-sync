@@ -10,8 +10,7 @@ import {
 import { cva, type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
-// import DisplayIcon from "@/components/display-icon";
-import { Button } from "@/components/ui/button";
+
 const panelVariants = cva(
 	`w-full transform overflow-hidden rounded-lg bg-white text-left align-middle shadow-xl transition-all`,
 	{
@@ -140,15 +139,6 @@ export default function Modal({
 														titleClass
 													)}
 												>
-													{/* <DisplayIcon
-														icon={
-															<CircleUserRound
-																size={20}
-																className="text-royal"
-															/>
-														}
-													/>
- */}
 													{title}
 												</DialogTitle>
 											)}
@@ -164,16 +154,12 @@ export default function Modal({
 											)}
 										</div>
 										{showCloseButton && (
-											<Button
-												type="button"
-												aria-label="close"
+											<X
+												size={25}
+												className="cursor-pointer"
 												onClick={handleClose}
-												className="rounded-full border border-gray-300"
-												variant="outline"
-												size="icon"
-											>
-												<X size={20} className="cursor-pointer" />
-											</Button>
+												aria-label="close"
+											/>
 										)}
 									</header>
 									{/* <div className="scrollbar-thin scrollbar-thumb-blue-500 custom-max-height px-2 py-5"> */}

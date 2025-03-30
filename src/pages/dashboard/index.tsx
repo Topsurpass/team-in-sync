@@ -2,9 +2,11 @@ import { useState } from "react";
 import ProjectListCard from "./project-cards";
 import { projectData } from "@/data/project-data";
 import Pagination from "@/components/pagination";
+import AddProject from "./project-modal";
 
 export default function Dashboard() {
 	const [currentPage, setCurrentPage] = useState(1);
+
 	const itemsPerPage = 4;
 
 	const totalItems = projectData.length;
@@ -22,7 +24,7 @@ export default function Dashboard() {
 					/>
 				))}
 			</div>
-
+			<AddProject />
 			<Pagination
 				totalItems={totalItems}
 				itemsPerPage={itemsPerPage}

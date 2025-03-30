@@ -25,8 +25,8 @@ const initialValues = {
 export default function CompleteProfile() {
 	const [activeStep, setActiveStep] = useState(1);
 	const isLastStep = activeStep === steps.length;
-
 	const { mutate: updateProfile, isPending } = useProfileUpdate();
+
 	const methods = useForm<ProfileInputs>({
 		resolver: zodResolver(profileSchema),
 		mode: "onChange",

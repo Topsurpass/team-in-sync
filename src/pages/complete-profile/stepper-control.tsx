@@ -24,7 +24,7 @@ export default function StepperControl({
 				Previous
 			</Button>
 			<Button
-				isLoading
+				isLoading={isLoading}
 				disabled={isLoading}
 				onClick={isLastStep ? handleSubmit : nextStep}
 				className="w-full rounded-full md:w-2/3"
