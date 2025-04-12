@@ -18,6 +18,7 @@ import NewProject from "@/pages/projects/new/";
 import Skills from "@/pages/profile/skills";
 import Overview from "@/pages/profile/overview";
 import ProfileProjects from "@/pages/profile/projects";
+import ProfileProtectedRoute from "./profile-protected-route";
 
 const routeConfig = [
 	{
@@ -49,9 +50,9 @@ const routeConfig = [
 	{
 		path: "/",
 		element: (
-			<ProtectedRoute>
+			<ProfileProtectedRoute>
 				<RootLayout />
-			</ProtectedRoute>
+			</ProfileProtectedRoute>
 		),
 		children: [
 			{
@@ -68,10 +69,6 @@ const routeConfig = [
 				children: [
 					{
 						index: true,
-						element: <Navigate to="overview" replace />,
-					},
-					{
-						path: "overview",
 						element: <Overview />,
 					},
 					{

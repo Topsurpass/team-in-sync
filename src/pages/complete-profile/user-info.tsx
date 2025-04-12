@@ -31,8 +31,8 @@ export default function UserInformation() {
 	const formattedRoles = useMemo(
 		() =>
 			(data as any)?.data?.map((role: any) => ({
-				value: role.id,
-				label: role.name,
+				value: role?.id,
+				label: role?.name,
 			})) || [],
 		[data]
 	);
@@ -61,17 +61,17 @@ export default function UserInformation() {
 			setValue("full_name", profileData.full_name);
 			setValue("bio", profileData.bio);
 			setValue("experience_level", {
-				value: profileData.experience_level,
-				label: profileData.experience_level,
+				value: profileData?.experience_level,
+				label: profileData?.experience_level,
 			});
 			setValue("role", {
-				value: profileData.role.id,
-				label: profileData.role.name,
+				value: profileData?.role?.id,
+				label: profileData?.role?.name,
 			});
 
 			if (profileData.profile_picture_url) {
 				const fetchImageAsFile = async () => {
-					const response = await fetch(profileData.profile_picture_url);
+					const response = await fetch(profileData?.profile_picture_url);
 					const blob = await response.blob();
 					const file = new File([blob], "profile-picture.jpg", {
 						type: blob.type,
