@@ -29,6 +29,7 @@ export default function Overview() {
 		control,
 		setValue,
 		trigger,
+		watch,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<UserDetailsInputs>({
@@ -48,6 +49,19 @@ export default function Overview() {
 	const { data: profile } = useGetProfile();
 	const { mutate: updateProfile, isPending } = useProfileUpdate();
 	const queryClient = useQueryClient();
+	const profilePic = watch("profile_picture");
+
+	useEffect(() => {
+		if (profilePic && profilePic instanceof File) {
+			const previewURL = URL.createObjectURL(profilePic);
+			setFile({
+				result: profilePic,
+				preview: previewURL,
+				hasFile: true,
+				error: [],
+			});
+		}
+	}, [profilePic]);
 
 	useEffect(() => {
 		const profileData = (profile as any)?.data;
