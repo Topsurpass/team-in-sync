@@ -84,7 +84,7 @@ export default function SideBarMenuItem({ item }: { item: MenuList }) {
 				<Link
 					to={item.path}
 					className={`${inactiveLink} ${
-						item.path === pathname ? activeLink : ""
+						pathname.startsWith(item.path) ? activeLink : ""
 					} hover:bg-royal-light`}
 					onClick={closeSidebarOnMobile}
 				>
