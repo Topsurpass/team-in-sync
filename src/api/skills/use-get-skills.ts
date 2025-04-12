@@ -25,6 +25,6 @@ export default function useGetSkills(role?: string) {
 	return useQuery({
 		queryKey: [QueryKeys.GET_SKILLS, role],
 		queryFn: () => getSkills(role ? { role } : {}),
-		enabled: !!role,
+		// enabled: !!role,
 	});
 }

@@ -143,7 +143,7 @@ export default function SignUpForm() {
 							<GoogleLogin
 								onSuccess={handleSuccess}
 								onError={handleFailure}
-								text="continue_with"
+								text="signup_with"
 								shape="pill"
 							/>
 						</div>

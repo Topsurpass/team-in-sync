@@ -7,12 +7,7 @@ const steps = [
 	{
 		step: 2,
 		title: "Skills Info",
-		fields: ["skills"],
-	},
-	{
-		step: 3,
-		title: "Social links",
-		fields: ["portfolio_link", "github_link", "linkedin_link"],
+		fields: ["skills", "portfolio_link", "github_link", "linkedin_link"],
 	},
 ];
 

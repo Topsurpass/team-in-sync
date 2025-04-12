@@ -100,7 +100,7 @@ export default function Modal({
 					leaveTo="opacity-0"
 				>
 					{/* bg-opacity controls the background backdrop density/opacity */}
-					<div className={cn("fixed inset-0 bg-black/80 bg-opacity-70")} />
+					<div className={cn("fixed inset-0 bg-black/60")} />
 				</TransitionChild>
 				<div className="fixed inset-0 overflow-y-auto">
 					{/* items-start, items-center controls the position of the modal */}
@@ -163,7 +163,9 @@ export default function Modal({
 										)}
 									</header>
 									{/* <div className="scrollbar-thin scrollbar-thumb-blue-500 custom-max-height px-2 py-5"> */}
-									{children}
+									<div className="flex w-full justify-center">
+										{children}
+									</div>
 								</section>
 							</DialogPanel>
 						</TransitionChild>

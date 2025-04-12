@@ -7,8 +7,8 @@ export default function PageWrapper({ children }: { children: ReactNode }) {
 	const bodyStyle = cn(
 		"mt-[68px] ml-1 h-full overflow-y-auto mb-5 transition-all duration-300 ease-in-out",
 		{
-			"sm:pl-[20rem]": !toggleCollapse,
-			"sm:pl-[6.4rem]": toggleCollapse,
+			"sm:pl-[18rem]": !toggleCollapse,
+			"sm:pl-[5.4rem]": toggleCollapse,
 			"md:pl-[18rem] md:pr-0": !toggleCollapse,
 			"md:pl-[5.5rem] md:pr-2": toggleCollapse,
 		}

@@ -1,6 +1,7 @@
 import { ErrorMessage } from "@hookform/error-message";
+import CreatableSelect from "react-select/creatable";
 import { Control, Controller } from "react-hook-form";
-import Select, { MenuPlacement, Props as SelectProps } from "react-select";
+import { MenuPlacement, Props as SelectProps } from "react-select";
 import { cn } from "@/lib/utils";
 import { reactSelectStyle } from "@/lib/style";
 
@@ -44,7 +45,7 @@ export default function ReactSelectField({
 								{label}
 							</label>
 						)}
-						<Select
+						<CreatableSelect
 							options={options}
 							styles={reactSelectStyle(errors, name, isDisabled)}
 							className={cn("react-select-container", className)}
@@ -59,6 +60,10 @@ export default function ReactSelectField({
 							menuPlacement={menuPlacement}
 							maxMenuHeight={350}
 							{...field}
+							getNewOptionData={(inputValue: string) => ({
+								value: inputValue,
+								label: inputValue,
+							})}
 							{...others}
 						/>
 						<ErrorMessage

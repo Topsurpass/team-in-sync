@@ -5,7 +5,8 @@ export const projectData: ProjectListProps[] = [
 		id: 1,
 		title: "E-Commerce Website",
 		status: "Ongoing",
-		description: "A full-stack e-commerce platform with payment integration.",
+		description:
+			"A full-stack e-commerce platform with payment integration. A full-stack e-commerce platform with payment integration.",
 		profession: ["Frontend Developer", "Backend Developer", "UI/UX Designer"],
 		date: "2023-04-12",
 		members: [
