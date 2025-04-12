@@ -21,6 +21,17 @@ import useProfileUpdate from "@/api/authentication/use-profile-update";
 export default function Skills() {
 	const [isEditing, setIsEditing] = useState(false);
 	const { control, setValue, trigger, handleSubmit } = useForm<UserSkillsLinksInput>({
+		defaultValues: {
+			portfolio_link: "",
+			github_link: "",
+			linkedin_link: "",
+			skills: [
+				{
+					value: "",
+					label: "",
+				},
+			],
+		},
 		resolver: zodResolver(userSkillsAndLinksSchema),
 	});
 	const { data: profile } = useGetProfile();

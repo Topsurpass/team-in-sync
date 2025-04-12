@@ -79,27 +79,35 @@ export default function Overview() {
 
 			if (profileData.profile_picture_url) {
 				const fetchImageAsFile = async () => {
-					const response = await fetch(profileData.profile_picture_url);
-					const blob = await response.blob();
-					const file = new File([blob], "profile-picture.jpg", {
-						type: blob.type,
-					});
+					let imageUrl = profileData.profile_picture_url;
+					if (imageUrl.startsWith("http://")) {
+						imageUrl = imageUrl.replace("http://", "https://");
+					}
 
-					const previewURL = URL.createObjectURL(file);
-					setFile({
-						result: file,
-						preview: previewURL,
-						hasFile: true,
-						error: [],
-					});
-					setValue("profile_picture", file);
+					try {
+						const response = await fetch(imageUrl);
+						const blob = await response.blob();
+						const file = new File([blob], "profile-picture.jpg", {
+							type: blob.type,
+						});
+
+						const previewURL = URL.createObjectURL(file);
+						setFile({
+							result: file,
+							preview: previewURL,
+							hasFile: true,
+							error: [],
+						});
+						setValue("profile_picture", file);
+					} catch (error) {
+						return error;
+					}
 				};
 
 				fetchImageAsFile();
 			}
 		}
 	}, [profile, setValue]);
-
 	useEffect(() => {
 		if (file?.hasFile) {
 			setValue("profile_picture", file.result);
