@@ -9,7 +9,7 @@ const tabs = [
 export default function ProfileLayout() {
 	return (
 		<div className="mx-auto w-full">
-			<div className="m-3 flex gap-4 pb-0">
+			<div className="m-2 flex gap-4 pb-0">
 				{tabs.map((tab) => (
 					<NavLink
 						key={tab.path}

@@ -1,5 +1,7 @@
-import { LuClipboardList } from "react-icons/lu";
-import { CiUser, CiHome, CiBellOn } from "react-icons/ci";
+import { MdOutlineHome } from "react-icons/md";
+import { FaRegUser } from "react-icons/fa";
+import { LuBell } from "react-icons/lu";
+import { FaProjectDiagram } from "react-icons/fa";
 
 import { SideNavItem } from "@/types/sidenav-item";
 
@@ -10,22 +12,24 @@ const SIDENAV_ITEMS: SideNavItem[] = [
 			{
 				title: "Dashboard",
 				path: "/dashboard",
-				icon: <CiHome size={20} />,
+				icon: <MdOutlineHome size={26} />,
 			},
-			{
-				title: "Profile",
-				path: "/profile",
-				icon: <CiUser />,
-			},
+
 			{
 				title: "My Projects",
 				path: "/projects",
-				icon: <LuClipboardList />,
+				icon: <FaProjectDiagram size={24} />,
+			},
+
+			{
+				title: "Profile",
+				path: "/profile",
+				icon: <FaRegUser size={22} />,
 			},
 			{
 				title: "Notification",
 				path: "/notifications",
-				icon: <CiBellOn />,
+				icon: <LuBell />,
 			},
 		],
 	},

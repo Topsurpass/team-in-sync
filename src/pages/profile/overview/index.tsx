@@ -8,7 +8,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Card, CardContent } from "@/components/ui/card";
 import { TextField, TextArea } from "@/components/ui/forms";
 import { EXPERIENCE } from "@/lib/constants";
-import EventFileUpload from "../complete-profile/profile-pic-upload";
+import EventFileUpload from "../../complete-profile/profile-pic-upload";
 import useGetRoles from "@/api/roles/use-get-roles";
 import { ReactSelect } from "@/components/ui/forms";
 import useGetProfile from "@/api/profile/use-get-profile";
@@ -156,7 +156,7 @@ export default function Overview() {
 		<div className="flex w-full justify-center">
 			<form className="w-full">
 				<Card className="w-full border-0 shadow-none">
-					<CardContent className="mt-5 grid w-full gap-3">
+					<CardContent className="mt-5 grid w-full gap-3 p-2">
 						<div className="flex items-center justify-between">
 							<EventFileUpload
 								resetFile={resetFile}

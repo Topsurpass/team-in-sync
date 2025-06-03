@@ -2,7 +2,6 @@ import { View } from "lucide-react";
 import { PaginationState, VisibilityState } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
 import DataTableSSR from "@/components/table/datatable-ssr-card";
-// import { Button } from "@/components/ui/button";
 import { projectData } from "@/data/project-data";
 import ProjectSheet from "./project-sheet";
 import { Badge } from "@/components/ui/badge";
@@ -50,11 +49,7 @@ export default function ProjectTable() {
 			{
 				accessorKey: "title",
 				header: "Job Title",
-				cell: (info: any) => (
-					<p className="text-lg font-semibold text-gray-800">
-						{info.getValue()}
-					</p>
-				),
+				cell: (info: any) => <p className="text-gray-800">{info.getValue()}</p>,
 			},
 			{
 				accessorKey: "status",
@@ -72,8 +67,8 @@ export default function ProjectTable() {
 					const description = info.getValue();
 					return (
 						<div>
-							<h2 className="font-bold">About Project</h2>
-							<p className="text-sm text-gray-600">
+							<h2 className="text-sm">About Project</h2>
+							<p className="text-xs text-gray-600">
 								{description.length > 100
 									? description.slice(0, 100) + "..."
 									: description}
@@ -89,8 +84,8 @@ export default function ProjectTable() {
 					const projects = info.getValue();
 					return (
 						<div>
-							<h2 className="font-bold">Looking for</h2>
-							<p className="text-sm text-gray-600">
+							<h2 className="text-sm">Looking for</h2>
+							<p className="text-xs text-gray-600">
 								{projects.length > 4
 									? projects.slice(0, 2).join(", ") + ", ..."
 									: projects.join(", ")}
@@ -131,12 +126,6 @@ export default function ProjectTable() {
 									</div>
 								)}
 							</div>
-							{/* { <Button
-								className="rounded-3xl bg-blue-500 p-2 text-xs text-white"
-								onClick={() => handleOpenSheet(row.id)}
-							>
-								View Details
-							</Button> } */}
 							<View
 								className="cursor-pointer text-2xl text-black"
 								onClick={() => handleOpenSheet(row.id)}

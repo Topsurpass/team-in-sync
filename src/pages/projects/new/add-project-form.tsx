@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormContext } from "react-hook-form";
+import { X, PlusCircle, Trash2, AlertCircle } from "lucide-react";
 import { TextField, TextArea } from "@/components/ui/forms";
 import { Button } from "@/components/ui/button";
 import useGlobalProvider from "@/hooks/use-global-provider";
@@ -20,7 +21,6 @@ export default function CreateNewProject({ handleSubmit, isLoading }: handleSubm
 	const [, setActiveRoleIndex] = useState<number | null>(null);
 	const [roleInput, setRoleInput] = useState("");
 	const { errors } = formState;
-
 	const handleAddRole = useCallback(() => {
 		if (roleInput.trim()) {
 			const updatedRoles = [
@@ -51,62 +51,78 @@ export default function CreateNewProject({ handleSubmit, isLoading }: handleSubm
 	};
 
 	return (
-		<div className="min-h-screen w-full space-y-5 border bg-gray-100 p-5 md:px-16 md:pt-8">
-			<div className="flex justify-between rounded-2xl bg-gray-200 p-5 font-bold">
-				<p>Create New Project</p>
-				<p
-					className="cursor-pointer rounded-full border-2 border-gray-600 px-2"
+		<div className="from-gray-25 min-h-screen w-full bg-gradient-to-br to-gray-100 p-2 md:p-8">
+			<div className="flex items-center justify-between rounded-2xl border bg-white px-3 py-5 shadow-md md:px-8">
+				<div>
+					<h1 className="text-xl font-bold text-gray-900 md:text-xl">
+						Create New Project
+					</h1>
+					<p className="mt-1 text-sm text-gray-500">
+						Start collaborating with your team in minutes
+					</p>
+				</div>
+				<button
+					className="rounded-lg p-2 text-gray-400 transition-all hover:bg-gray-50 hover:text-gray-600"
 					onClick={() => navigate(-1)}
 				>
-					X
-				</p>
+					<X className="h-6 w-6" />
+				</button>
 			</div>
-			<div className="flex min-h-[500px] flex-col gap-5 rounded-2xl bg-white py-5 md:flex-row md:justify-between">
-				<div className="space-y-5 px-5 md:w-1/2 md:border-r-2">
-					<h2 className="font-bold">Project Details</h2>
+
+			<div className="mt-8 grid gap-8 rounded-2xl border bg-white p-3 shadow-md md:grid-cols-2 md:p-8">
+				<div className="space-y-6 md:pr-8">
+					<div className="border-b border-gray-100 pb-4">
+						<h2 className="text-lg font-semibold uppercase tracking-wide text-gray-900">
+							Project Details
+						</h2>
+					</div>
+
 					<TextField
-						label="Title"
+						label="Project Title"
 						name="title"
 						control={control}
-						placeholder="Give your project a title"
+						placeholder="Enter project name"
+						className=""
 					/>
+
 					<TextArea
 						label="Description"
 						name="description"
 						control={control}
-						placeholder="Give detailed description of this project"
-						rows={10}
+						placeholder="Describe the project goals and scope"
+						rows={6}
+						className=""
 					/>
 
-					<div className="hidden w-full justify-center pt-24 md:flex">
+					<div className="hidden border-t border-gray-100 pt-6 md:block">
 						<Button
-							title="Submit"
-							label="Submit"
-							className="w-1/2 rounded-3xl py-6"
+							label="Create Project"
+							className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-3 font-semibold text-white transition-transform hover:scale-[1.02] hover:from-blue-700 hover:to-blue-600"
 							onClick={handleSubmit}
 							isLoading={isLoading}
 						/>
 					</div>
 				</div>
-				<div className="space-y-5 px-5 md:w-1/2">
-					<div className="rounded-2xl border bg-gray-200 p-3 font-bold">
-						Roles
-					</div>
-					<div className="flex w-full items-end gap-5">
-						<div className="w-full">
-							<TextField
-								label="Required Roles"
-								name="role"
-								control={control}
-								placeholder="Type new role and press enter"
-								value={roleInput}
-								onChange={(e) => setRoleInput(e.target.value)}
-								onKeyDown={handleKeyDown}
-							/>
-						</div>
+
+				<div className="md:pl-8">
+					<div className="mb-6 rounded-xl bg-gradient-to-r from-blue-900 to-blue-500 px-6 py-4">
+						<h3 className="text-sm font-semibold uppercase tracking-wide text-white">
+							Team Requirements
+						</h3>
 					</div>
 
-					<div className="space-y-2">
+					<TextField
+						label="Add Role"
+						name="role"
+						control={control}
+						placeholder="Enter role (e.g. Frontend Developer)"
+						value={roleInput}
+						onChange={(e) => setRoleInput(e.target.value)}
+						onKeyDown={handleKeyDown}
+						className=""
+					/>
+
+					<div className="mt-6 space-y-4">
 						{roles.map((role, index) => {
 							const skillError = (errors.roles as any)?.[index]?.skills
 								?.message;
@@ -114,60 +130,71 @@ export default function CreateNewProject({ handleSubmit, isLoading }: handleSubm
 							return (
 								<div
 									key={index}
-									className="space-y-1 rounded-xl border bg-gray-200/50 p-2"
+									className="group relative rounded-xl border-2 border-gray-100 bg-white p-5 transition-all hover:border-blue-100 hover:shadow-md"
 								>
-									<div className="flex justify-between">
-										<p className="text-sm font-semibold">
-											{role.role}
-										</p>
-										<span className="flex gap-3">
-											<p
-												className="cursor-pointer text-royal"
+									<div className="flex items-start justify-between">
+										<div>
+											<p className="font-medium text-gray-900">
+												{role.role}
+											</p>
+											<div className="mt-2 flex flex-wrap gap-2">
+												{role.skills.length > 0 ? (
+													role.skills.map((skill) => (
+														<span
+															key={skill.label}
+															className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700"
+														>
+															{skill.label}
+														</span>
+													))
+												) : (
+													<span className="text-sm text-gray-400">
+														No skills added
+													</span>
+												)}
+											</div>
+										</div>
+										<div className="flex items-center gap-3">
+											<button
+												className="text-blue-600 transition-colors hover:text-blue-700"
 												onClick={() => {
 													setActiveRoleIndex(index);
 													onModalOpen(EntityType.PROJECT);
 												}}
 											>
-												Add skill
-											</p>
-											<p
-												className="cursor-pointer text-destructive"
+												<PlusCircle className="h-5 w-5" />
+											</button>
+											<button
+												className="text-gray-400 transition-colors hover:text-red-500"
 												onClick={() => handleRemoveRole(index)}
 											>
-												X
-											</p>
-										</span>
+												<Trash2 className="h-5 w-5" />
+											</button>
+										</div>
 									</div>
-									<div className="text-xs text-gray-600">
-										<p>
-											Skills:{" "}
-											{role.skills.length > 0
-												? role.skills
-														.map((skill) => skill.label)
-														.join(", ")
-												: "No skills added yet"}
-										</p>
-									</div>
+
 									{skillError && (
-										<p className="text-xs font-medium text-destructive">
-											{skillError}
-										</p>
+										<div className="mt-3 flex items-center gap-2 text-sm text-red-600">
+											<AlertCircle className="h-4 w-4" />
+											<span>{skillError}</span>
+										</div>
 									)}
 								</div>
 							);
 						})}
 					</div>
 				</div>
-				<div className="flex w-full justify-center pt-4 md:hidden md:pt-8">
+
+				<div className="border-t border-gray-100 pt-6 md:hidden">
 					<Button
-						title="Submit"
-						label="Submit"
-						className="w-full rounded-3xl py-6 md:w-1/2"
+						label="Create Project"
+						className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-3 font-semibold text-white hover:from-blue-700 hover:to-blue-600"
 						onClick={handleSubmit}
 						isLoading={isLoading}
 					/>
 				</div>
 			</div>
+
 			<SkillsModal />
 		</div>
 	);

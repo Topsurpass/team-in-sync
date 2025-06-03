@@ -94,7 +94,7 @@ export default function Skills() {
 			<Card className="w-full border-0 shadow-none">
 				{/* <pre>{JSON.stringify(watch(), null, 2)}</pre> */}
 
-				<CardContent className="grid gap-4">
+				<CardContent className="grid gap-4 p-2">
 					<div>
 						<div className="flex w-full justify-end">
 							<Button

@@ -8,17 +8,20 @@ import RootLayout from "@/layout/root-layout";
 import ProtectedRoute from "./protected-route";
 import ProfileLayout from "@/pages/profile";
 import Projects from "@/pages/projects";
-import Notifications from "@/pages/notifications";
 import PublicLayout from "@/layout/public-layout";
 import PublicRoute from "./public-route";
 import VerifyEmail from "@/pages/verify-email";
 import NotFoundPage from "@/pages/error404";
 import NoMenuBarProtectedLayout from "@/layout/no-menu-protected-layout";
 import NewProject from "@/pages/projects/new/";
-import Skills from "@/pages/profile/skills";
+import Skills from "@/pages/profile/skills-and-links";
 import Overview from "@/pages/profile/overview";
 import ProfileProjects from "@/pages/profile/projects";
 import ProfileProtectedRoute from "./profile-protected-route";
+import AllNotifications from "@/pages/notifications/all";
+import SystemAlerts from "@/pages/notifications/system-alerts";
+import ProjectUpdatesAlert from "@/pages/notifications/project-updates-alerts";
+import NotificationLayout from "@/pages/notifications";
 
 const routeConfig = [
 	{
@@ -88,7 +91,21 @@ const routeConfig = [
 
 			{
 				path: "notifications",
-				element: <Notifications />,
+				element: <NotificationLayout />,
+				children: [
+					{
+						index: true,
+						element: <AllNotifications />,
+					},
+					{
+						path: "projects",
+						element: <ProjectUpdatesAlert />,
+					},
+					{
+						path: "system",
+						element: <SystemAlerts />,
+					},
+				],
 			},
 		],
 	},

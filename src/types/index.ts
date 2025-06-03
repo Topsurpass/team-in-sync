@@ -19,3 +19,17 @@ export interface IProfilePicFileUpload {
 	resetFile: () => void;
 	error?: { message: string };
 }
+
+export type NotificationType =
+	| "project_added"
+	| "join_request"
+	| "platform_update"
+	| "reminder";
+
+export interface Notification {
+	id: number;
+	type: NotificationType;
+	title: string;
+	description: string;
+	time: string;
+}
